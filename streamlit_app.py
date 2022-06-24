@@ -26,7 +26,14 @@ if __name__ == '__main__':
     st.subheader('develop by https://kasira.biz')
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='weights/leprosy-jan2022.pt', help='model.pt path(s)')
+
+    model = ("Jan-2022", "June-2022")
+    model_index = st.sidebar.selectbox("SELECT", range(len(model)), format_func=lambda x: model[x])
+    if model_index == 0:
+        parser.add_argument('--weights', nargs='+', type=str, default='weights/leprosy-jan2022.pt', help='model.pt path(s)')
+    else:
+        parser.add_argument('--weights', nargs='+', type=str, default='weights/leprosy-june2022.pt', help='model.pt path(s)')
+    
     parser.add_argument('--source', type=str, default='data/images', help='source')
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.35, help='object confidence threshold')
