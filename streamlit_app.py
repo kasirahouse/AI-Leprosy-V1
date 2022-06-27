@@ -28,7 +28,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     model = ("June-2022", "Jan-2022")
-    model_index = st.sidebar.selectbox("SELECT", range(len(model)), format_func=lambda x: model[x])
+    model_index = st.sidebar.selectbox("Leprosy-AI-Model", range(len(model)), format_func=lambda x: model[x])
     if model_index == 0:
         parser.add_argument('--weights', nargs='+', type=str, default='weights/leprosy-june2022.pt', help='model.pt path(s)')
     else:
@@ -53,11 +53,11 @@ if __name__ == '__main__':
     opt = parser.parse_args()
     print(opt)
 
-    source = ("Image", "Video")
-    source_index = st.sidebar.selectbox("SELECT", range(len(source)), format_func=lambda x: source[x])
+    source = ("ภาพถ่าย", "วีดีโอ")
+    source_index = st.sidebar.selectbox("รูปแบบข้อมูล", range(len(source)), format_func=lambda x: source[x])
 
     if source_index == 0:
-        uploaded_file = st.sidebar.file_uploader("Image", type=['png', 'jpeg', 'jpg'])
+        uploaded_file = st.sidebar.file_uploader("ภาพถ่าย", type=['png', 'jpeg', 'jpg'])
         if uploaded_file is not None:
             is_valid = True
             with st.spinner(text='In progress...'):
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         else:
             is_valid = False
     else:
-        uploaded_file = st.sidebar.file_uploader("Video", type=['mp4'])
+        uploaded_file = st.sidebar.file_uploader("วีดีโอ", type=['mp4'])
         if uploaded_file is not None:
             is_valid = True
             with st.spinner(text='In progress...'):
@@ -86,13 +86,13 @@ if __name__ == '__main__':
             detect(opt)
 
             if source_index == 0:
-                with st.spinner(text='Preparing Image'):
+                with st.spinner(text='กรุณารอสักครู่'):
                     for img in os.listdir(get_detection_folder()):
                         st.image(str(Path(f'{get_detection_folder()}') / img))
 
                     st.balloons()
             else:
-                with st.spinner(text='Preparing Video'):
+                with st.spinner(text='กรุณารอสักครู่'):
                     for vid in os.listdir(get_detection_folder()):
                         st.video(str(Path(f'{get_detection_folder()}') / vid))
 
