@@ -27,12 +27,12 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
 
-    model = ("Jan-2022", "June-2022")
+    model = ("June-2022", "Jan-2022")
     model_index = st.sidebar.selectbox("SELECT", range(len(model)), format_func=lambda x: model[x])
     if model_index == 0:
-        parser.add_argument('--weights', nargs='+', type=str, default='weights/leprosy-jan2022.pt', help='model.pt path(s)')
-    else:
         parser.add_argument('--weights', nargs='+', type=str, default='weights/leprosy-june2022.pt', help='model.pt path(s)')
+    else:
+        parser.add_argument('--weights', nargs='+', type=str, default='weights/leprosy-jan2022.pt', help='model.pt path(s)')
     
     parser.add_argument('--source', type=str, default='data/images', help='source')
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
